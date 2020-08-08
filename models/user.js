@@ -11,7 +11,7 @@ const UserSchema = Schema({
 
 // Hide __v and parse '_id' to 'uid'
 UserSchema.method('toJSON', function () {
-  const { __v, _id, ...object } = this.toObject();
+  const { __v, _id, password, ...object } = this.toObject();
 
   object.uid = _id;
   return object;
