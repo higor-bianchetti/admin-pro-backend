@@ -8,10 +8,11 @@ const {
   deleteUser,
 } = require('../controllers/users');
 const { validator } = require('../middlewares/validator');
+const { jwtValidator } = require('../middlewares/jwt-validator');
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get('/', jwtValidator, getUsers);
 
 router.post(
   '/',
@@ -27,13 +28,15 @@ router.post(
 router.put(
   '/:id',
   [
+    jwtValidator,
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Email is required').isEmail(),
-    check('role', 'Role is required').isEmail(),
+    check('role', 'Role is required').not().isEmpty(),
+    validator,
   ],
   updateUser
 );
 
-router.delete('/:id', deleteUser);
+router.delete('/:id', jwtValidator, deleteUser);
 
 module.exports = router;
