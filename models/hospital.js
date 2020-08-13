@@ -4,7 +4,7 @@ const HospitalSchema = Schema(
   {
     name: { type: String, required: true },
     img: { type: String },
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   }
   // { collection: 'Hospitais' }  TO RENAME SCHEMA ON DATABASE
 );
@@ -16,4 +16,4 @@ HospitalSchema.method('toJSON', function () {
   return object;
 });
 
-module.exports = model('User', HospitalSchema);
+module.exports = model('Hospital', HospitalSchema);

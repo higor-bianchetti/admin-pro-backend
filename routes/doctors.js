@@ -8,7 +8,7 @@ const {
   createDoctor,
   updateDoctor,
   deleteDoctor,
-} = require('../controllers/Doctors');
+} = require('../controllers/doctors');
 
 const router = Router();
 
