@@ -19,6 +19,7 @@ router.post(
   [
     jwtValidator,
     check('name', 'Doctor name is required').not().isEmpty(),
+    check('hospital', 'Hospital Id is invalid').isMongoId(),
     validator,
   ],
   createDoctor
