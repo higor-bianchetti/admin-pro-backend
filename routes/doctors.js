@@ -14,7 +14,15 @@ const router = Router();
 
 router.get('/', getDoctors);
 
-router.post('/', [], createDoctor);
+router.post(
+  '/',
+  [
+    jwtValidator,
+    check('name', 'Doctor name is required').not().isEmpty(),
+    validator,
+  ],
+  createDoctor
+);
 
 router.put('/:id', [], updateDoctor);
 
