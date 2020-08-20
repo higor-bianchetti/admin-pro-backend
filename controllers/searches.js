@@ -22,4 +22,40 @@ const getAll = async (req, res = response) => {
   });
 };
 
-module.exports = { getAll };
+const getDocuments = async (req, res = response) => {
+  const collection = req.params.collectionName;
+  const search = req.params.search;
+  const regex = new RegExp(search, 'i');
+
+  let data = [];
+
+  switch (collection) {
+    case 'doctors':
+      data = await Doctor.find({ name: regex })
+        .populate('user', 'name img')
+        .populate('hospital', 'name img');
+      break;
+
+    case 'hospitals':
+      data = await Hospital.find({ name: regex }).populate('user', 'name img');
+      break;
+
+    case 'users':
+      data = await User.find({ name: regex });
+      break;
+
+    default:
+      return res.status(400).json({
+        ok: true,
+        msg:
+          'Collection not found. Possible collections: doctors, hospitals or users',
+      });
+  }
+
+  res.json({
+    ok: true,
+    results: data,
+  });
+};
+
+module.exports = { getAll, getDocuments };
