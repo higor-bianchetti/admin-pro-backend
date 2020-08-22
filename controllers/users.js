@@ -9,8 +9,8 @@ const getUsers = async (req, res) => {
 
   // Running the promises in parallel
   const [totalUsers, users] = await Promise.all([
-    User.count(),
-    User.find({}, 'name email role google').skip(offset).limit(5),
+    User.countDocuments(),
+    User.find({}, 'name email role google img').skip(offset).limit(5),
   ]);
 
   res.json({
