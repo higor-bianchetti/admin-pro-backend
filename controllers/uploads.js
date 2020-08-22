@@ -1,5 +1,6 @@
 const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
+const { updatePicture } = require('../helpers/update-picture');
 
 const fileUpload = (req, res = response) => {
   const collection = req.params.collection;
@@ -46,6 +47,8 @@ const fileUpload = (req, res = response) => {
         msg: 'Error moving the image',
       });
     }
+
+    updatePicture(collection, id, fileName);
 
     res.json({
       ok: true,
