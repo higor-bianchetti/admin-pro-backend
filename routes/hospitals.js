@@ -24,7 +24,15 @@ router.post(
   createHospital
 );
 
-router.put('/:id', [], updateHospital);
+router.put(
+  '/:id',
+  [
+    jwtValidator,
+    check('name', 'Hospital name is required').not().isEmpty(),
+    validator,
+  ],
+  updateHospital
+);
 
 router.delete('/:id', deleteHospital);
 
