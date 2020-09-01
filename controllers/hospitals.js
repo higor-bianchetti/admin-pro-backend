@@ -57,8 +57,8 @@ const updateHospital = async (req, res = response) => {
 
     res.json({
       ok: true,
-      msg: 'PUT Hospital',
-      hospitalId,
+      msg: 'Hospital Updated',
+      updatedHospital,
     });
   } catch (error) {
     console.log(error);
