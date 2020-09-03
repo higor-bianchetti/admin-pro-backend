@@ -34,6 +34,6 @@ router.put(
   updateHospital
 );
 
-router.delete('/:id', deleteHospital);
+router.delete('/:id', jwtValidator, deleteHospital);
 
 module.exports = router;

@@ -70,10 +70,31 @@ const updateHospital = async (req, res = response) => {
 };
 
 const deleteHospital = async (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: 'DELETE Hospital',
-  });
+  const hospitalId = req.params.id;
+
+  try {
+    const hospital = await Hospital.findById(hospitalId);
+
+    if (!hospital) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Hospital not found!',
+      });
+    }
+
+    await Hospital.findByIdAndDelete(hospitalId);
+
+    res.json({
+      ok: true,
+      msg: 'Hospital Deleted',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: 'Unexpected Error... Please, see the logs for more details',
+    });
+  }
 };
 
 module.exports = {
