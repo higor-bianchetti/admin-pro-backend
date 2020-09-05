@@ -17,7 +17,7 @@ To run in a develop mode:
 ```
 npm run start:dev
 ```
-## Environments Keys
+## Environments Keys (~/.env)
 * PORT: Port to running the application
 * DB_CNN: Database Connection
 * JWT_SECRET: JWT Token
